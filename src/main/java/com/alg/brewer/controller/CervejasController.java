@@ -15,15 +15,14 @@ import com.alg.brewer.model.Cerveja;
 public class CervejasController {
 
 	@RequestMapping("/cervejas/novo")
-	public String novo() {
+	public String novo(Cerveja cerveja) {
 		return "cerveja/CadastroCerveja";
 	}
 	
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
-			model.addAttribute("mensagem","Erro no formulário");
-			return "cerveja/CadastroCerveja";
+			return novo(cerveja);
 		}
 		
 		redirectAttributes.addFlashAttribute("mensagem","Cerveja salva com sucesso " + cerveja);
