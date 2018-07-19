@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -21,7 +22,7 @@ import com.alg.brewer.controller.CervejasController;
 @Configuration
 @ComponentScan(basePackageClasses= {CervejasController.class})
 @EnableWebMvc
-public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware  {
+public class WebConfig implements ApplicationContextAware, WebMvcConfigurer {
 
 	private ApplicationContext context;
 	
@@ -53,5 +54,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		resolver.setSuffix(".html");
 		resolver.setTemplateMode(TemplateMode.HTML);
 		return resolver;
+	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 	}
 }
