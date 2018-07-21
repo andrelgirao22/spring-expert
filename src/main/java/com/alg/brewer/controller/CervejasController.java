@@ -28,10 +28,4 @@ public class CervejasController {
 		redirectAttributes.addFlashAttribute("mensagem","Cerveja salva com sucesso " + cerveja);
 		return "redirect:/cervejas/novo";
 	}
-	
-	@RequestMapping("/cervejas/cadastro")
-	public String cadastro() {
-		return "cerveja/cadastro-produto";
-	}
-	
 }
