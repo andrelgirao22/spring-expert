@@ -83,7 +83,9 @@
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>${thymeleaf.version}</version>
+			<scope>compile</scope>
 		</dependency>
+
 		
 		  <!-- Thymeleaf - Layout Dialect -->
 		<dependency>
