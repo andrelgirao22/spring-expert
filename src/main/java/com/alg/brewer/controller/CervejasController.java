@@ -15,12 +15,13 @@ import com.alg.brewer.model.Cerveja;
 import com.alg.brewer.model.Origem;
 import com.alg.brewer.model.Sabor;
 import com.alg.brewer.repository.Estilos;
+import com.alg.brewer.services.CadastroCervejaService;
 
 @Controller
 public class CervejasController {
 
-	/*@Autowired
-	private Cervejas cervejas;*/
+	@Autowired
+	private CadastroCervejaService service;
 	
 	@Autowired
 	private Estilos estilos;
@@ -37,11 +38,13 @@ public class CervejasController {
 	
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+		
 		if(result.hasErrors()) {
 			return novo(cerveja);
 		}
 		
-		redirectAttributes.addFlashAttribute("mensagem","Cerveja salva com sucesso " + cerveja);
+		this.service.salvar(cerveja);
+		redirectAttributes.addFlashAttribute("mensagem","Cerveja salva com sucesso ");
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 }

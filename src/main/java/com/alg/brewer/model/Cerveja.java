@@ -87,6 +87,7 @@ public class Cerveja {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+	
 	public BigDecimal getTeorAlcoolico() {
 		return teorAlcoolico;
 	}
