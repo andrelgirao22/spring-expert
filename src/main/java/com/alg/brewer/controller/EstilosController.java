@@ -13,9 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alg.brewer.model.Estilo;
 import com.alg.brewer.services.CadastroEstiloService;
+import com.alg.brewer.services.exception.NomeEstiloCadastradoException;
 
 @Controller
-public class EstiloController {
+public class EstilosController {
 
 	@Autowired
 	private CadastroEstiloService service;
@@ -33,7 +34,12 @@ public class EstiloController {
 			return novo(estilo);
 		}
 		
-		this.service.salvar(estilo);
+		try {			
+			this.service.salvar(estilo);
+		} catch(NomeEstiloCadastradoException exception) {
+			result.rejectValue("nome",exception.getMessage(), exception.getMessage());
+			return novo(estilo);
+		}
 		redirectAttributes.addFlashAttribute("mensagem","Estilo salvo com sucesso ");
 		return new ModelAndView("redirect:/estilos/novo");
 	}
