@@ -18,6 +18,7 @@ import com.alg.brewer.repository.Estilos;
 import com.alg.brewer.services.CadastroCervejaService;
 
 @Controller
+@RequestMapping("/cervejas")
 public class CervejasController {
 
 	@Autowired
@@ -26,7 +27,7 @@ public class CervejasController {
 	@Autowired
 	private Estilos estilos;
 	
-	@RequestMapping("/cervejas/novo")
+	@RequestMapping("/novo")
 	public ModelAndView novo(Cerveja cerveja) {
 		
 		ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
@@ -36,7 +37,7 @@ public class CervejasController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 		
 		if(result.hasErrors()) {
